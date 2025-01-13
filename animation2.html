@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animation</title>
+  <style>
+    #container {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      background: yellow;
+    }
+
+    #animate {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <p><button id="start">Saugen</button></p>
+
+  <div id="container">
+    <div id="animate"></div>
+  </div>
+
+  <script>
+    let id = null;
+    const elem = document.getElementById("animate");
+
+    const clean = () => {
+      let x = 0;
+      let y = 0;
+      let round = 0;
+      let moveDownCount = 0;
+
+      elem.style.top = '0px';
+      elem.style.left = '0px';
+
+      const scaleX = () => x += (round % 2 === 0) ? 1 : -1;
+
+      const frame = () => {
+        if (x === 0 && y === 350) return clearInterval(id);
+
+        if (x <= 350 && x >= 0) {
+          elem.style.left = x + 'px';
+          scaleX();
+        } else if (moveDownCount < 50) {
+          y++;
+          moveDownCount++;
+          elem.style.top = y + 'px';
+        } else {
+          round += 1;
+          moveDownCount = 0;
+          scaleX();
+        }
+      }
+
+      clearInterval(id);
+      id = setInterval(frame, 5);
+    }
+
+    document.querySelector('#start').addEventListener('click', () => clean());
+  </script>
+</body>
+
+</html>
