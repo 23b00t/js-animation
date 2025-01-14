@@ -36,43 +36,42 @@
     let id = null;
     // Wähle zu bewegendes Objekt
     const elem = document.getElementById("animate");
+    const btn = document.querySelector('#start');
 
     // Funktion zum Ausführen der Animation
     const clean = () => {
       // Initialisiere x und y Koordinaten
-      let x = 0;
-      let y = 0;
-      // Initialisiere Rundenzahl zum Ermitteln der Rechts- oder Linksbewegung
-      let round = 0;
-      // Schritte der y Bewegung
-      let moveDownCount = 0;
+      let x = 0, y = 0;
 
-      // Startposition
-      elem.style.top = '0px';
-      elem.style.left = '0px';
+      // Führe Rechts- oder Linksbewegung 
+      // (für y = 0, 100, 200, ... nach Rechts (+1) sonst nach Links (-1))
+      const scaleX = () => x += (y % 100 === 0) ? 1 : -1;
 
-      // Führe Rechts- oder Linksbewegung aus basierend auf der Rundenzahl
-      const scaleX = () => x += (round % 2 === 0) ? 1 : -1;
+      // Zeichne Element an Position x, y 
+      const drawAnimation = () => {
+        elem.style.left = x + 'px';
+        elem.style.top = y + 'px';
+      }
 
+      // Führe animierte Bewegung aus
       const frame = () => {
-        // Setze Intervall zurück, wenn Zielposition erreicht
-        if (x === 0 && y === 350) return clearInterval(id);
+        // Aktiviere Button und setze Intervall zurück, wenn Zielposition erreicht
+        if (x === 0 && y === 350) {
+          btn.disabled = false;
+          return clearInterval(id);
+        }
 
         // X-Achse Bewegung
         if (x <= 350 && x >= 0) {
-          elem.style.left = x + 'px';
+          drawAnimation(); // Bevor x den Wertebereich verlässt
           scaleX();
-        } else if (moveDownCount < 50) {
-          // Y-Achse Bewegung
-          y++;
-          moveDownCount++;
-          elem.style.top = y + 'px';
-        } else {
-          // Richtungsänderung und erste x Bewegung
-          round += 1;
-          moveDownCount = 0;
-          scaleX();
+        } else { // Y-Achse Bewegung
+          y += 1;
+          drawAnimation();
+          // Ende der Y-Bewegung und erste X-Bewegung die zum erfüllen der ersten if Bedingung führt
+          if (y % 50 === 0) scaleX();
         }
+
       }
 
       // Intervall zurücksetzen und Animation ausführen
@@ -80,8 +79,11 @@
       id = setInterval(frame, 5);
     }
 
-    // Eventlistener auf Button der die Animation startet
-    document.querySelector('#start').addEventListener('click', () => clean());
+    // Button deaktiviern und Eventlistener auf Button der die Animation startet
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+      clean();
+    });
   </script>
 </body>
 
