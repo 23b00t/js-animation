@@ -1,13 +1,13 @@
-// Funktion zum Überprüfen der Kollision
-export const checkCollision = (redBox, pixel) => {
+// Function to check the collision between the vacuum and the crumbs
+export const checkCollision = (redBox, crumb) => {
   const redBoxRect = redBox.getBoundingClientRect();
-  const pixelRect = pixel.getBoundingClientRect();
+  const crumbRect = crumb.getBoundingClientRect();
 
   return !(
-    redBoxRect.right < pixelRect.left ||
-    redBoxRect.left > pixelRect.right ||
-    redBoxRect.bottom < pixelRect.top ||
-    redBoxRect.top > pixelRect.bottom
+    redBoxRect.right < crumbRect.left ||
+    redBoxRect.left > crumbRect.right ||
+    redBoxRect.bottom < crumbRect.top ||
+    redBoxRect.top > crumbRect.bottom
   );
 };
 

@@ -1,9 +1,7 @@
-export const container = document.getElementById('container');
-export const elem = document.getElementById('animate');
+export const carpet = document.querySelector('#carpet');
+export const elem = document.querySelector('#cleaner');
 export const btn = document.querySelector('#start');
 export let id = null;
 
-// Funktion zum Setzen von `id` (wird benötigt, um `id` zu aktualisieren)
-export const setId = (newId) => {
-  id = newId;
-};
+// Function to set `id` (needed to update `id`)
+export const setId = (newId) => id = newId;

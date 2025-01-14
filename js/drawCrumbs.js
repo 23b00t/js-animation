@@ -1,20 +1,19 @@
-import { container } from './variables.js';
+import { carpet } from './variables.js';
 
 export const drawCrumbs = () => {
   for (let i = 0; i < 100; i++) {
-    // Erstelle ein Pixel
-    const pixel = document.createElement('div');
-    pixel.classList.add('pixel');
+    const crumb = document.createElement('div');
+    crumb.classList.add('crumb');
 
-    // Zufällige Position innerhalb des Containers
+    // Random position within the container
     const x = Math.floor(Math.random() * 399); // Horizontale Position (0-398)
     const y = Math.floor(Math.random() * 399); // Vertikale Position (0-398)
 
-    // Setze die Position
-    pixel.style.left = `${x}px`;
-    pixel.style.top = `${y}px`;
+    // Set the position 
+    crumb.style.left = `${x}px`;
+    crumb.style.top = `${y}px`;
 
-    // Füge das Pixel zum Container hinzu
-    container.appendChild(pixel);
+    // Add the crumb to the container
+    carpet.appendChild(crumb);
   }
 }

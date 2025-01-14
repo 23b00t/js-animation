@@ -1,11 +1,11 @@
-#container {
+#carpet {
   width: 400px;
   height: 400px;
   position: relative;
   background: yellow;
 }
 
-#animate {
+#cleaner {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -13,7 +13,7 @@
   z-index: 1;
 }
 
-.pixel {
+.crumb {
   width: 2px;
   height: 2px;
   position: absolute;

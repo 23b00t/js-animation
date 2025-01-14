@@ -3,7 +3,7 @@ import { clean } from './clean.js';
 import { drawAnimation } from './drawAnimation.js';
 import { btn, id } from './variables.js';
 
-// Button deaktivieren und Eventlistener auf Button der die Animation startet
+// Disable the button and add event listener to the button that starts the animation
 btn.addEventListener('click', () => {
   btn.disabled = true;
   clean();
